@@ -86,14 +86,13 @@ def format_workout(record: dict[str, Any]) -> dict[str, Any]:
     date = parse_date_as_timestamp(record.get("startDate", 0))
     value = parse_float_with_try(record.get("duration", 0))
     unit = record.get("durationUnit", "unit")
-    source = record.get("sourceName", "unknown")
-    device = record.get("device", "unknown")
+    device = record.get("sourceName", "unknown")
 
     return {
         "measurement": measurement,
         "time": date,
         "fields": {"value": value},
-        "tags": {"unit": unit, "source": source, "device": device},
+        "tags": {"unit": unit, "device": device},
     }
 
 
