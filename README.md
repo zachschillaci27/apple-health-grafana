@@ -2,8 +2,8 @@
 
 Tool to import your Apple Health Data in Influx and visualize them in Grafana.
 
-![metrics](example1.png)
-![routes](example2.png)
+![metrics](assets/example1.png)
+![routes](assets/example2.png)
 
 ## Export your Apple health Data
 
@@ -84,17 +84,10 @@ _Note: Depending on the amount of data the export has, it can take a few minutes
 ## Visualization and next steps
 
 
-Head to __http://localhost:3000__, and log with the grafana creds from the compose file (defaults to `admin`:`health`).
+Head to __http://localhost:3000__, and log with the grafana credentials from the compose file (defaults to `admin`:`health`).
 
 You should see some graphs with metrics in them.
 3 dashboards are created by default:
-- a generic one displaying every metric available, 
-- a more refined one for specific metrics that are probably present , like walking distance, hearth related metrics..
-- a workout routes one, that shows a GPS map of your outdoor routes (walking/running/biking).
-
-
-## Tips on further analyzing the data
-
-Some metrics can be displayed __as is__, but others might need tweaking in the influx request:
-- adjusting the time interval to 1d to group daily metrics.
-- using __sum()__ instead of __mean()__ to aggregate the metrics for a given interval.
+- a generic one displaying every metric available,
+- a more refined one for specific metrics that are probably present, like walking distance, hearth related metric
+- a workout routes one, that shows a GPS map of your outdoor routes (walking/running/biking)
