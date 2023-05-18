@@ -85,8 +85,7 @@ _Note: Depending on the amount of data the export has, it can take a few minutes
 
 Head to __http://localhost:3000__, and login with the grafana credentials from the compose file (defaults to `admin`:`health`).
 
-You should see some graphs with metrics in them.
-3 dashboards are created by default:
-- a generic one displaying every metric available
-- a more refined one for specific metrics that are probably present (incl. workouts, walking, heart rate, etc.)
-- a workout routes one, that shows a GPS map of your outdoor routes (walking/running/biking)
+Three dashboards are created by default:
+- **Apple Health:** a generic one displaying every metric available
+- **Apple Health Specific Metrics:** a more refined one for specific metrics (incl. workouts, heart rate, etc.)
+- **Workout Routes:** displays a GPS map of your outdoor workout routes (walking/running/biking)
