@@ -132,12 +132,12 @@ def process_workout_routes(client: InfluxDBClient) -> None:
 def process_health_data(client: InfluxDBClient) -> None:
     export_xml_files = [f for f in os.listdir(EXPORT_PATH) if EXPORT_XML_REGEX.match(f)]
     if not export_xml_files:
-        print("No export file found, skipping...")
+        print("No export file found, skipping ...")
         return
     export_file = os.path.join(EXPORT_PATH, export_xml_files[0])
     print("Export file is", export_file)
 
-    print("Removing potentially malformed XML..")
+    print("Removing potentially malformed XML ...")
     p = subprocess.run(
         "sed -i '/<HealthData/,$!d' " + export_file, shell=True, capture_output=True
     )
@@ -170,7 +170,7 @@ def process_health_data(client: InfluxDBClient) -> None:
 
 
 if __name__ == "__main__":
-    print("Unzipping the export file...")
+    print("Unzipping the export file ...")
     try:
         unpack_archive(ZIP_PATH, "/export")
     except Exception as unzip_err:
@@ -188,7 +188,7 @@ if __name__ == "__main__":
             print("Influx is ready.")
             break
         except Exception:
-            print("Waiting on influx to be ready..")
+            print("Waiting on influx to be ready ...")
             time.sleep(1)
 
     process_workout_routes(client)
