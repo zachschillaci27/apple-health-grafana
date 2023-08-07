@@ -10,6 +10,7 @@ from datetime import datetime as dt
 from shutil import unpack_archive
 from typing import Any, Union
 
+from formatters import parse_date_as_timestamp, parse_float_with_try, AppleStandHourFormatter 
 import gpxpy
 from gpxpy.gpx import GPXTrackPoint
 from influxdb import InfluxDBClient
@@ -19,21 +20,6 @@ ZIP_PATH = "/export.zip"
 ROUTES_PATH = "/export/apple_health_export/workout-routes/"
 EXPORT_PATH = "/export/apple_health_export"
 EXPORT_XML_REGEX = re.compile("export.xml", re.IGNORECASE)
-
-
-def parse_float_with_try(v: Any) -> Union[float, int]:
-    """convert v to float or 0"""
-    try:
-        return float(v)
-    except ValueError:
-        try:
-            return int(v)
-        except Exception:
-            return 0
-
-
-def parse_date_as_timestamp(v: Any) -> int:
-    return int(dt.fromisoformat(v).timestamp())
 
 
 def format_route_point(
@@ -68,6 +54,10 @@ def format_record(record: dict[str, Any]) -> dict[str, Any]:
         .removeprefix("HKCategoryTypeIdentifier")
         .removeprefix("HKDataType")
     )
+
+    if measurement == "AppleStandHour":
+        return AppleStandHourFormatter(record)
+
     date = parse_date_as_timestamp(record.get("startDate", 0))
     value = parse_float_with_try(record.get("value", 1))
     unit = record.get("unit", "unit")
