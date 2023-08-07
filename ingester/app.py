@@ -3,19 +3,22 @@ Ingester module that converts Apple Health export zip file
 into influx db datapoints
 """
 import os
+import re
+import subprocess
 import time
-import xml.etree.ElementTree as etree
+from datetime import datetime as dt
 from shutil import unpack_archive
 from typing import Any, Union
 
-import dateutil.parser
 import gpxpy
 from gpxpy.gpx import GPXTrackPoint
 from influxdb import InfluxDBClient
+from lxml import etree
 
 ZIP_PATH = "/export.zip"
 ROUTES_PATH = "/export/apple_health_export/workout-routes/"
-EXPORT_PATH = "/export/apple_health_export/export.xml"
+EXPORT_PATH = "/export/apple_health_export"
+EXPORT_XML_REGEX = re.compile("export.xml", re.IGNORECASE)
 
 
 def parse_float_with_try(v: Any) -> Union[float, int]:
@@ -30,7 +33,7 @@ def parse_float_with_try(v: Any) -> Union[float, int]:
 
 
 def parse_date_as_timestamp(v: Any) -> int:
-    return int(dateutil.parser.parse(v).timestamp())
+    return int(dt.fromisoformat(v).timestamp())
 
 
 def format_route_point(
@@ -127,12 +130,24 @@ def process_workout_routes(client: InfluxDBClient) -> None:
 
 
 def process_health_data(client: InfluxDBClient) -> None:
-    if not os.path.exists(EXPORT_PATH):
-        print("No export.xml file found, skipping ...")
+    export_xml_files = [f for f in os.listdir(EXPORT_PATH) if EXPORT_XML_REGEX.match(f)]
+    if not export_xml_files:
+        print("No export file found, skipping ...")
         return
+    export_file = os.path.join(EXPORT_PATH, export_xml_files[0])
+    print("Export file is", export_file)
+
+    print("Removing potentially malformed XML ...")
+    p = subprocess.run(
+        "sed -i '/<HealthData/,$!d' " + export_file, shell=True, capture_output=True
+    )
+    if p.returncode != 0:
+        print(p.stdout, p.stderr)
+
     records = []
     total_count = 0
-    for _, elem in etree.iterparse(EXPORT_PATH):
+    context = etree.iterparse(export_file, recover=True)
+    for _, elem in context:
         if elem.tag == "Record":
             records.append(format_record(elem))
             elem.clear()
@@ -173,7 +188,7 @@ if __name__ == "__main__":
             print("Influx is ready.")
             break
         except Exception:
-            print("Waiting on influx to be ready..")
+            print("Waiting on influx to be ready ...")
             time.sleep(1)
 
     process_workout_routes(client)
