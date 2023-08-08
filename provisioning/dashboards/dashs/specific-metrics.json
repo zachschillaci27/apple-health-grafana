@@ -38,7 +38,7 @@
       },
       "id": 48,
       "panels": [],
-      "title": "Yearly Activity",
+      "title": "Lifetime Activity",
       "type": "row"
     },
     {
@@ -125,7 +125,7 @@
           "measurement": "DistanceWalkingRunning",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\") FROM \"StepCount\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\") FROM \"StepCount\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "F",
           "resultFormat": "time_series",
@@ -159,7 +159,7 @@
           "measurement": "DistanceWalkingRunning",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\") FROM \"FlightsClimbed\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\") FROM \"FlightsClimbed\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "D",
           "resultFormat": "time_series",
@@ -193,7 +193,7 @@
           "measurement": "DistanceWalkingRunning",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\") FROM \"DistanceWalkingRunning\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\") FROM \"DistanceWalkingRunning\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "C",
           "resultFormat": "time_series",
@@ -219,7 +219,7 @@
           "measurement": "DistanceCycling",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\") FROM \"DistanceCycling\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\") FROM \"DistanceCycling\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -253,7 +253,7 @@
           "measurement": "DistanceWalkingRunning",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"AppleStandTime\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"AppleStandTime\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "G",
           "resultFormat": "time_series",
@@ -287,7 +287,7 @@
           "measurement": "DistanceWalkingRunning",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"AppleExerciseTime\" WHERE (\"device\" =~ /^$source$/) AND  time > now() - 365d GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"AppleExerciseTime\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "H",
           "resultFormat": "time_series",
@@ -390,7 +390,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"FunctionalStrengthTraining\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"FunctionalStrengthTraining\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -434,7 +434,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"Cycling\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"Cycling\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -478,7 +478,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"Running\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"Running\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "C",
           "resultFormat": "time_series",
@@ -522,7 +522,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"Squash\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"Squash\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "D",
           "resultFormat": "time_series",
@@ -566,7 +566,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"DownhillSkiing\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"DownhillSkiing\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "E",
           "resultFormat": "time_series",
@@ -610,7 +610,7 @@
           "measurement": "FunctionalStrengthTraining",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT sum(\"value\")/60 FROM \"Swimming\" WHERE (\"device\" =~ /^$source$/) AND $timeFilter GROUP BY \"unit\"",
+          "query": "SELECT sum(\"value\")/60 FROM \"Swimming\" WHERE (\"device\" =~ /^$source$/) GROUP BY \"unit\"",
           "rawQuery": true,
           "refId": "F",
           "resultFormat": "time_series",
@@ -3173,7 +3173,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -3204,8 +3204,8 @@
         "auto_min": "10s",
         "current": {
           "selected": false,
-          "text": "30d",
-          "value": "30d"
+          "text": "1w",
+          "value": "1w"
         },
         "hide": 0,
         "name": "period",
@@ -3216,7 +3216,7 @@
             "value": "1d"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1w",
             "value": "1w"
           },
@@ -3226,7 +3226,7 @@
             "value": "2w"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "30d",
             "value": "30d"
           },
@@ -3257,7 +3257,7 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "1d",
           "value": "1d"
         },
