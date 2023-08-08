@@ -2234,7 +2234,7 @@
       },
       "id": 10,
       "panels": [],
-      "title": "Daily Health Data",
+      "title": "Health Data",
       "type": "row"
     },
     {
@@ -2323,7 +2323,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             }
@@ -2357,7 +2357,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             }
@@ -2385,7 +2385,7 @@
           "tags": []
         }
       ],
-      "title": "Body mass",
+      "title": "Body mass ($sampling)",
       "type": "timeseries"
     },
     {
@@ -2474,7 +2474,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -2514,7 +2514,7 @@
           "tags": []
         }
       ],
-      "title": "Cardio fitness (VO2 max) ",
+      "title": "Cardio fitness ($sampling)",
       "type": "timeseries"
     },
     {
@@ -2603,7 +2603,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -2643,7 +2643,7 @@
           "tags": []
         }
       ],
-      "title": "Heart rate variability",
+      "title": "Heart rate variability ($sampling)",
       "type": "timeseries"
     },
     {
@@ -2733,7 +2733,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -2781,7 +2781,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -2829,7 +2829,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -2869,7 +2869,7 @@
           "tags": []
         }
       ],
-      "title": "Heart rate statistics",
+      "title": "Heart rate statistics ($sampling)",
       "type": "timeseries"
     },
     {
@@ -2959,7 +2959,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -3006,7 +3006,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -3046,7 +3046,7 @@
           "tags": []
         }
       ],
-      "title": "Walking/Resting heart rate",
+      "title": "Walking/Resting heart rate ($sampling)",
       "type": "timeseries"
     },
     {
@@ -3135,7 +3135,7 @@
           "groupBy": [
             {
               "params": [
-                "1d"
+                "$sampling"
               ],
               "type": "time"
             },
@@ -3175,7 +3175,7 @@
           "tags": []
         }
       ],
-      "title": "Respiratory rate",
+      "title": "Respiratory rate ($sampling)",
       "type": "timeseries"
     }
   ],
@@ -3217,9 +3217,9 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "selected": true,
-          "text": "1w",
-          "value": "1w"
+          "selected": false,
+          "text": "30d",
+          "value": "30d"
         },
         "hide": 0,
         "name": "period",
@@ -3230,7 +3230,7 @@
             "value": "1d"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "1w",
             "value": "1w"
           },
@@ -3240,7 +3240,7 @@
             "value": "2w"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "30d",
             "value": "30d"
           },
@@ -3261,6 +3261,65 @@
           }
         ],
         "query": "1d,1w,2w,30d,90d,180d,365d",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": true,
+          "text": "1d",
+          "value": "1d"
+        },
+        "hide": 0,
+        "name": "sampling",
+        "options": [
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": true,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "1w",
+            "value": "1w"
+          }
+        ],
+        "query": "1m,10m,30m,1h,6h,12h,1d,1w",
         "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
